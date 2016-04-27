@@ -1,0 +1,13 @@
+prefix=/usr/local
+exec_prefix=/usr/local
+libdir=/usr/local/lib/x86_64-linux-gnu
+includedir=/usr/local/include
+
+Name: FreeRDP
+Description: A free remote desktop protocol client
+URL: http://www.freerdp.com/
+Version: 1.0.1
+Requires: 
+Libs: -L${libdir} -lfreerdp-core -lfreerdp-codec -lfreerdp-gdi -lfreerdp-locale -lfreerdp-crypto -lfreeerdp-auth -lfreerdp-rail -lfreerdp-channels -lfreerdp-utils
+Cflags: -I${includedir}
+

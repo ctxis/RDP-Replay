@@ -1,0 +1,162 @@
+        RDP REPLAY
+        ==========
+
+Contents
+========
+
+extractrdpkeys/ Source and binaries for extracting RDP keys from DPAPI
+libfree_rdp/    Original library circa 2013
+README          You found this already!
+test/           Test samples and instructions
+Makefile        Top level make file
+replay/         Source directory for the replay tool
+tools/          Other support software
+
+=============================================================================
+Usage
+=====
+
+$ rdp_replay -h
+Usage: rdp_replay  <options>
+    -h                    Help. You're reading it!
+    -l <lsa_secrets_file> File containing LSA secrets for RDP decryption
+    -L <lsa_raw_secret>   File containing a single binary LSA secret
+    -o <output_file>      Output video file (e.g. "rdp.avi")
+    -p <rsa_priv_file>    PEM file with SSL key (can be repeated)
+    -r <pcap_file>        The pcap file (default is stdin)
+    -t <port>             The TCP port to select in the pcap (default: any)
+    -x <num>              Playback tcp stream at <num> times realtime
+    --clipboard_16le      Clipboard is assumed to be UTF16le and stripped back up 8-bit
+    --debug_chan          Show channel messages
+    --debug_caps          Show capabilities messages
+    --fullspeed           Playback tcp stream at full-speed
+    --help                Help. You're still reading it!
+    --no_cksum            Don't check the packet (IP and TCP) checksums
+    --no_cursor           Don't show the cursor
+    --realtime            Playback tcp stream in realtime
+    --reverse             Reverse client/server direction (sometimes useful for extracted data)
+    --save_clipboard      Save clipboard events to file (e.g. "clip-00000000-up")
+    --show_time           Display packet capture time
+    --show_keys           Display keypress (repeat for verbose)
+    --sound               Play sounds
+    --rdprd               Display RDPDR channel requests
+    --sw                  Use SW_GDI for rendering (not recommended)
+
+Simple example:
+$ rdp_replay -l RC4priv.txt -r capture.pcap
+
+=============================================================================
+Building
+=========
+
+These instructions are for building on Ubuntu 14.04.
+
+This package contains the LibfreeRDP package and the enhancements for the
+replay tool. Once dependencies are met, run make.
+
+The following line (run as root) should install all required packages.
+
+# apt-get install -y build-essential git-core cmake libssl-dev libx11-dev libxext-dev libxinerama-dev libxcursor-dev libxdamage-dev libxv-dev libxkbfile-dev libasound2-dev libcups2-dev libxml2 libxml2-dev libxrandr-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libavutil-dev libavcodec-dev libavformat-dev libpcap-dev libreadline-dev
+
+Once these are installed, run make.
+This will (hopefully) produce ./replay/rdp_replay
+
+=============================================================================
+Private Keys:
+
+ There is a blog post available online (http://www.contextis.com/blog/rdp-replay/)
+that covers extracting RDP keys in some detail.
+
+Old style RC4 keys should be put in a file of the form:
+
+    # Comment lines start with #
+    # Blank lines are ignored
+
+    <name>,<public_key>,<private_key>
+
+An example:
+
+    Example_RC4,5253413148000000000200003f00000001000100edf118339e6cf30888cad52a43921547e3ce962eb3639785dc2433588a8c89e21606c2394095d8c4816045818e007d26178ff5c79d7a461b03836bdf6660dabd0000000000000000,81e95dd837c1adc5a68202cfa7d01d9fae10c99f690acdc458bd76de3cdc9d7f1e31d1c0ad2fa89b8433735c5dce29d7126041d62cad3f70a7248c60e9488239
+
+These RC4 key files are specified on the command line.
+
+SSL private keys (PEM files) are specified directly on the command line.
+=============================================================================
+LSA secrets:
+
+ Private keys for RDP services (pre Vista) are stored as LSA secrets. There is
+a simple program available (from passcape) to read them. Example:
+
+C:\>LsaSecretReader.exe L$HYDRAENCKEY_28ada6da-d622-11d1-9cb9-00c04fb16e75
+======================================================
+= LSA secret reader by Passcape Software             =
+= Visit http://www.passcape.com for more information =
+======================================================
+
+0000: 52 53 41 32 48 00 00 00 00 02 00 00 3F 00 00 00
+0010: 01 00 01 00 ED F1 18 33 9E 6C F3 08 88 CA D5 2A
+0020: 43 92 15 47 E3 CE 96 2E B3 63 97 85 DC 24 33 58
+0030: 8A 8C 89 E2 16 06 C2 39 40 95 D8 C4 81 60 45 81
+0040: 8E 00 7D 26 17 8F F5 C7 9D 7A 46 1B 03 83 6B DF
+0050: 66 60 DA BD 00 00 00 00 00 00 00 00 C5 2E C2 9A
+0060: CD 5C 85 91 09 37 C7 45 A8 76 C3 9F E8 AD D6 D6
+0070: 21 2B 44 FF 9A 5B 99 70 62 88 24 ED 00 00 00 00
+0080: 09 E9 24 CA 37 F3 88 DE B2 E5 02 BF F7 4B E9 C2
+0090: 0C 28 D3 D8 40 72 6F 49 D2 CC E6 D3 62 2D F3 CC
+00A0: 00 00 00 00 CD 0B 24 05 48 0A CA A0 F6 54 5B 32
+00B0: A2 0F 3F AB EC 2A DF C9 BD D7 FB BE C0 D1 E6 CA
+00C0: 25 5A C5 E3 00 00 00 00 B9 D7 FD 7F EB AB EF D5
+00D0: 57 10 F0 6C F5 76 9B 79 9E 91 E3 D4 7F C7 74 71
+00E0: C1 C7 2E 67 B3 DE 49 17 00 00 00 00 3B 44 55 4B
+00F0: 46 21 AC 8F 38 A6 A8 A5 D7 06 31 0D 2A DA D1 D6
+0100: E4 2C ED D9 4F A4 D3 6D 35 E4 54 06 00 00 00 00
+0110: 81 E9 5D D8 37 C1 AD C5 A6 82 02 CF A7 D0 1D 9F
+0120: AE 10 C9 9F 69 0A CD C4 58 BD 76 DE 3C DC 9D 7F
+0130: 1E 31 D1 C0 AD 2F A8 9B 84 33 73 5C 5D CE 29 D7
+0140: 12 60 41 D6 2C AD 3F 70 A7 24 8C 60 E9 48 82 39
+0150: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0160: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0170: 00 00 00 00 00 00 00 00 00 00 00 00
+
+This gives public key of:
+ 52 53 41 31 48 00 00 00 00 02 00 00 3f 00 00 00
+ 01 00 01 00 ed f1 18 33 9e 6c f3 08 88 ca d5 2a
+ 43 92 15 47 e3 ce 96 2e b3 63 97 85 dc 24 33 58
+ 8a 8c 89 e2 16 06 c2 39 40 95 d8 c4 81 60 45 81
+ 8e 00 7d 26 17 8f f5 c7 9d 7a 46 1b 03 83 6b df
+ 66 60 da bd 00 00 00 00 00 00 00 00
+
+..and private key of
+ 81 e9 5d d8 37 c1 ad c5 a6 82 02 cf a7 d0 1d 9f
+ ae 10 c9 9f 69 0a cd c4 58 bd 76 de 3c dc 9d 7f
+ 1e 31 d1 c0 ad 2f a8 9b 84 33 73 5c 5d ce 29 d7
+ 12 60 41 d6 2c ad 3f 70 a7 24 8c 60 e9 48 82 39
+
+ NOTE: The public part of the key (from LsaSecret) starts "RSA2", but it will
+be "RSA1" when transmitted as public-only, in the secure exchange. You can see
+this easily in wireshark.
+
+How to extract the 2 available keys is shown below:
+
+LsaSecretReader.exe L$HYDRAENCKEY_28ada6da-d622-11d1-9cb9-00c04fb16e75
+LsaSecretReader.exe L$HYDRAENCKEY_52d1ad03-4565-44f3-8bfd-bbb0591f4b9d
+
+=============================================================================
+For SSL (Cert) based: You need mimikatz and psexec (SysInternals)
+
+Mimikatz as system: (psexec -s mimicatz.exe)
+  privilege::debug
+  crypto::patchcapi
+  crypto::patchcng
+  crypto::exportCertificates CERT_SYSTEM_STORE_LOCAL_MACHINE "Remote Desktop"
+
+  This will produce a .pfx file (probably in the current directory or the one
+containing mimikatz.exe)
+
+Break the private key out of the pfx (windows) file:
+$ openssl pkcs12 -in file.pfx -nodes -out x509.pem
+Use password:  mimikatz
+Get out the x509 private key.
+
+If you want to view a x509 PEM private key:
+$ openssl rsa -noout -in x509.pem -text

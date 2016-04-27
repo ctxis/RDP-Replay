@@ -1,0 +1,469 @@
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+                  "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry>
+  <refentryinfo>
+    <date>2011-08-27</date>
+    <author>
+      <authorblurb><para>The FreeRDP Team</para></authorblurb>
+    </author>
+  </refentryinfo>
+  <refmeta>
+    <refentrytitle>xfreerdp</refentrytitle>
+    <manvolnum>1</manvolnum>
+    <refmiscinfo class="source">freerdp</refmiscinfo>
+    <refmiscinfo class="manual">xfreerdp</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname><application>xfreerdp</application></refname>
+    <refpurpose>FreeRDP X11 client</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <refsynopsisdivinfo>
+      <date>2011-08-27</date>
+    </refsynopsisdivinfo>
+    <para>
+      <command>xfreerdp</command> [options] server[:port] [[options] server[:port] …]
+    </para>
+  </refsynopsisdiv>
+  <refsect1>
+    <refsect1info>
+      <date>2011-08-27</date>
+    </refsect1info>
+    <title>DESCRIPTION</title>
+    <para>
+      <command>xfreerdp</command> is an X11 Remote Desktop Protocol (RDP)
+      client which is part of the FreeRDP project. An RDP server is built-in
+      to many editions of Windows. Alternative servers included xrdp and VRDP (VirtualBox).
+    </para>
+  </refsect1>
+  <refsect1>
+    <title>OPTIONS</title>
+    <variablelist>
+      <varlistentry>
+        <term>-0</term>
+        <listitem>
+          <para>
+            Attach to the admin console of the server.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-a <replaceable class="parameter">bpp</replaceable></term>
+        <listitem>
+          <para>
+            Sets the color depth for the connection to <replaceable class="parameter">bpp</replaceable> bits per pixel.
+            Valid values are 8, 15, 16, 24 and 32. The default value is the color depth of the FreeRDP-window.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry id="WorkingDir">
+        <term>-c <replaceable class="parameter">dir</replaceable></term>
+        <listitem>
+          <para>
+            Sets the working-dir to <replaceable class="parameter">dir</replaceable>.
+            This parameter is only used when an AlternateShell (<xref linkend="AlternateShell"/>) is requested.
+            <replaceable class="parameter">dir</replaceable> should contain the executable file specified in the AlternateShell.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-D</term>
+        <listitem>
+          <para>
+            Removes the windows decorations.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-d</term>
+        <listitem>
+          <para>
+            Domain used in authentication.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-f</term>
+        <listitem>
+          <para>
+            start in full screen mode. This mode can always be en- and disabled using Ctrl-Alt-Enter.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-T <replaceable class="parameter">text</replaceable></term>
+        <listitem>
+          <para>
+            Sets the window title to <replaceable class="parameter">text</replaceable>.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-g <replaceable class="parameter">geometry</replaceable></term>
+        <listitem>
+          <para>
+            Sets the size of the FreeRDP window (and of the remote desktop, when establishing a new connection).
+            <replaceable class="parameter">geometry</replaceable> can have one of the following forms:
+            <itemizedlist>
+              <listitem>
+                <para>
+                  <replaceable class="parameter">W</replaceable>x<replaceable class="parameter">H</replaceable> - 
+                  in this case the resulting window will be of
+                  <replaceable class="parameter">W</replaceable>x<replaceable class="parameter">H</replaceable> pixels.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  <replaceable class="parameter">P</replaceable>% -
+                  in this case the resulting window will be <replaceable class="parameter">P</replaceable>%
+                  of your screen.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  The special keyword <emphasis>workarea</emphasis> -
+                  in this case the resulting window will be of the same size as your workarea.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-k <replaceable class="parameter">id</replaceable></term>
+        <listitem>
+          <para>
+            Sets the keyboard-layout-id to <replaceable class="parameter">id</replaceable>.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-n <replaceable class="parameter">hostname</replaceable></term>
+        <listitem>
+          <para>
+            Set the reported client hostname to <replaceable class="parameter">hostname</replaceable>.
+            Default is to automatically detect the hostname.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-o</term>
+        <listitem>
+          <para>
+            Play audio on the console instead of redirecting to the client.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-p <replaceable class="parameter">password</replaceable></term>
+        <listitem>
+          <para>
+            Password used in authentication.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry id="AlternateShell">
+        <term>-s <replaceable class="parameter">shell</replaceable></term>
+        <listitem>
+          <para>
+            Sets the startup-shell to <replaceable class="parameter">shell</replaceable>.
+            This parameter should contain a complete path to the alternate shell.
+            If the alternete shell requires a different working directory use <xref linkend="WorkingDir"/>.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-t <replaceable class="parameter">port</replaceable></term>
+        <listitem>
+          <para>
+            Connect to <replaceable class="parameter">port</replaceable>, instead of the default 3389.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-u <replaceable class="parameter">username</replaceable></term>
+        <listitem>
+          <para>
+            Username used in authentication.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-x <replaceable class="parameter">flag</replaceable></term>
+        <listitem>
+          <para>
+            Set the experiance performance flags.
+            <replaceable class="parameter">flag</replaceable> can be one of:
+            <itemizedlist>
+              <listitem>
+                <para>
+                  m - (modem): Equivalent to 15.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  b - (broadband): Equivalent to 1.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  l - (lan): Equivalent to 0.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  <replaceable class="parameter">num</replaceable> - A hexadecimal number that
+                  represents a bit-mask, were numbers mean the following
+                  <footnote><para>Taken from <ulink url="http://msdn.microsoft.com/en-us/library/cc240476%28v=prot.10%29.aspx">
+                  MS-RDPBCGR Section 2.2.1.11.1.1.1 - Extended Info Packet</ulink></para></footnote>:
+                  <itemizedlist>
+                    <listitem>
+                      <para>1: Disable desktop wallpaper.</para>
+                    </listitem>
+                    <listitem>
+                      <para>2: Disable full-window drag (only the window outline is displayed when the window is moved).</para>
+                    </listitem>
+                    <listitem>
+                      <para>4: Disable menu animations.</para>
+                    </listitem>
+                    <listitem>
+                      <para>8: Disable user interface themes.</para>
+                    </listitem>
+                    <listitem>
+                      <para>20: Disable mouse cursor shadows.</para>
+                    </listitem>
+                    <listitem>
+                      <para>40: Disable cursor blinking.</para>
+                    </listitem>
+                    <listitem>
+                      <para>80: Enable font smoothing.</para>
+                    </listitem>
+                    <listitem>
+                      <para>100: Enable Desktop Composition.</para>
+                    </listitem>
+                  </itemizedlist>
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>-z</term>
+        <listitem>
+          <para>
+            Enable compression.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--app</term>
+        <listitem>
+          <para>
+            initialize a RemoteApp connection. This implies -g workarea.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--ext</term>
+        <listitem>
+          <para>
+            load an extension
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--no-auth</term>
+        <listitem>
+          <para>
+            Skips authentication. This is useful e.g. for the current FreeRDP server that doesn't yet support server-side authentication.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--no-fastpath</term>
+        <listitem>
+          <para>
+            Disables fast-path. Use slow-path packets instead, which have larger headers.
+            It might be good for debugging certain issues when you suspect it might be
+            linked to the parsing of one of the two header types.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--no-motion</term>
+        <listitem>
+          <para>
+            Don't send mouse motion events.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--gdi</term>
+        <listitem>
+          <para>
+            GDI rendering backend. <replaceable class="parameter">backend</replaceable> can be either sw (software) or hw (hardware).
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--no-osb</term>
+        <listitem>
+          <para>
+            Disable off screen bitmaps.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--no-bmp-cache</term>
+        <listitem>
+          <para>
+            Disable bitmap cache.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--plugin</term>
+        <listitem>
+          <para>
+            load a plugin
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--rfx</term>
+        <listitem>
+          <para>
+            Enable RemoteFX.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--rfx-mode</term>
+        <listitem>
+          <para>
+            RemoteFX operational flags. <replaceable class="parameter">flags</replaceable> can be either v[ideo], i[mage]), default is video.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--nsc</term>
+        <listitem>
+          <para>
+            Enable NSCodec.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--disable-wallpaper</term>
+        <listitem>
+          <para>
+            Disable wallpaper.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--composition</term>
+        <listitem>
+          <para>
+            Enable composition (RDVH only, not to be confused with remote composition).
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--disable-full-window-drag</term>
+        <listitem>
+          <para>
+            Disable full window drag.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--disable-menu-animations</term>
+        <listitem>
+          <para>
+            Disable menu animations.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--disable-theming</term>
+        <listitem>
+          <para>
+            Disable theming.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--no-rdp</term>
+        <listitem>
+          <para>
+            Disable Standard RDP encryption.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--no-tls</term>
+        <listitem>
+          <para>
+            Disable TLS encryption.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--no-nla</term>
+        <listitem>
+          <para>
+            Disable network level authentication.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--sec <replaceable class="parameter">proto</replaceable></term>
+        <listitem>
+          <para>
+            force protocol security. <replaceable class="parameter">proto</replaceable> can be one of rdp, tls or nla.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--ntlm</term>
+        <listitem>
+          <para>
+            force NTLM protocol version. <replaceable class="parameter">version</replaceable> can be one of 1 or 2.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--ignore-certificate</term>
+        <listitem>
+          <para>
+            ignore verification of logon certificate.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--kbd-list</term>
+        <listitem>
+          <para>
+            list all keyboard layout ids used by -k
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>--version</term>
+        <listitem>
+          <para>
+            Print version information.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  <refsect1>
+    <title>LINKS</title>
+    <para>
+      <ulink url="http://www.freerdp.com/">http://www.freerdp.com/</ulink>
+    </para>
+  </refsect1>
+</refentry>
