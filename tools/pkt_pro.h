@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+#ifndef _PKT_PRO_H
+#define _PKT_PRO_H
+
 #include <stdint.h>
 #include <processor.h>
 
@@ -73,3 +76,5 @@ public:
         eth(p, p+len) ;
     }
 } ;
+
+#endif

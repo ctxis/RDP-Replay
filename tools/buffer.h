@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef __buffer_h__
-#define __buffer_h__
+#ifndef _BUFFER_H
+#define _BUFFER_H
 
 #include <stdlib.h>
 #include <stdint.h>

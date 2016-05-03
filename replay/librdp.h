@@ -1,5 +1,5 @@
-#ifndef __librdp_h__
-#define __librdp_h__
+#ifndef _LIBRDP_H
+#define _LIBRDP_H
 
 #include <stdlib.h>
 #include <stdint.h>
