@@ -11,7 +11,7 @@ FREERDP_INC_DIR =-I${FREE_HOME}/include
 debug: all
 debug: CPPFLAGS+=-g -ggdb
 
-FREERDP_FLAGS =-DWITH_XINERAMA -DWITH_XCURSOR -DWITH_XV -DWITH_XEXT -DEXT_PATH=\"/usr/lib/freerdp/extensions\"
+FREERDP_FLAGS =-DWITH_XINERAMA -DWITH_XCURSOR -DWITH_XV -DWITH_XEXT -DEXT_PATH=\"/usr/lib/freerdp/extensions\" -std=gnu89
 CPPFLAGS     += ${FREERDP_INC_DIR} -I. ${FREERDP_FLAGS}
 LIBS         += -lXrandr -lXcursor -lXinerama -lXv -lxkbfile -lXext -lX11 -lpcap -lpthread -ldl
 LIBS         += -lasound
