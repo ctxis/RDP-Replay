@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdio.h>
 
 void  librdp_stop() ;
 void *librdp_new() ;
