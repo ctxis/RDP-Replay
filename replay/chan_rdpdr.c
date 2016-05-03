@@ -16,6 +16,7 @@
 
 
 #include <stdint.h>
+#include <stdio.h>
 
 
 #define RDPDR_CTYP_CORE                 0x4472 /* Device redirector core component; most of the packets in this protocol are sent under this component ID. */
