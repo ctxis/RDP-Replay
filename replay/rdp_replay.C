@@ -200,7 +200,11 @@ int main(int argc, char *const *argv)
 
     pdelay.fullspeed() ; // Set pcap rate to fullspeed until we lock onto selected stream
     pthread_t th ;
-    pthread_create(&th, 0, monitor_thread, 0) ;
+    if (pthread_create(&th, 0, monitor_thread, 0))
+    {
+        printf("Sorry, pthread_create failed. Aborting.\n") ;
+        exit(1) ;
+    }
 
     (void)pcap_loop(ph, 0, pcap_delay::process, (u_char *)&pdelay) ;
 
