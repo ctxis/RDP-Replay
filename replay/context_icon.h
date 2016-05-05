@@ -1,5 +1,5 @@
-#ifndef _CONTEXT_ICON_H
-#define _CONTEXT_ICON_H
+#ifndef CONTEXT_ICON_H
+#define CONTEXT_ICON_H
 
 /* Values are:  0xAARRGGBB   (Alpha, R, G, B) */
 #define R ,0xffff0000

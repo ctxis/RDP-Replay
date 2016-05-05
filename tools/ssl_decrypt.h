@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef _SSL_DECRYPT_H
-#define _SSL_DECRYPT_H
+#ifndef SSL_DECRYPT_H
+#define SSL_DECRYPT_H
 
 #include <stdint.h>
 #include <openssl/ssl.h>

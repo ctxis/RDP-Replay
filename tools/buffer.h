@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef _BUFFER_H
-#define _BUFFER_H
+#ifndef BUFFER_H
+#define BUFFER_H
 
 #include <stdlib.h>
 #include <stdint.h>

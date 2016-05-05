@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef _PROCESSOR_H
-#define _PROCESSOR_H
+#ifndef PROCESSOR_H
+#define PROCESSOR_H
 
 #include <stdio.h>
 

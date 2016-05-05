@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef _PCAP_DELAY_H
-#define _PCAP_DELAY_H
+#ifndef PCAP_DELAY_H
+#define PCAP_DELAY_H
 
 #include <stdint.h>
 #include <stdlib.h>
