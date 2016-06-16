@@ -1,0 +1,24 @@
+There are 2 demo pcap files in this directory.
+
+Both files were recorded locally, and (due to ckecksum offloading) will need to be
+processed with the --no_cksum flag.
+
+The first demo show extraction of SSL and DPAPI private keys from a Windows-7
+box. The session is SSL based.
+
+  rdp_replay -r demo1.pcap -p demo1.pem --no_cksum
+
+The second demo has sound. It's the same Windows-7 box, but the pcap this time
+is based on RC4, so we use the binary key pulled out with extractrdpkeys.
+
+  rdp_replay -r demo2.pcap -L demo2.bin --sound --no_cksum
+
+
+Feel free to play around with other parameters (--show_keys and --show_time
+as examples).
+
+For more information, see http://www.contextis.com/resources/blog/rdp-replay/
+
+Enjoy.
+
+Steve.
