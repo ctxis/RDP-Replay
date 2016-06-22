@@ -281,7 +281,9 @@ void pkt_pro::ip4(PTR p, PTR max)
     ipl = p[2]<<8 | p[3] ; // IP length
     sip = p[12]<<24 | p[13]<<16 | p[14]<<8 | p[15] ;
     dip = p[16]<<24 | p[17]<<16 | p[18]<<8 | p[19] ;
-    if ( (ipl > (max-p)) || (hl >= ipl) || (0xffff != sum(p,hl)) )
+    if ( (ipl > (max-p)) || (hl >= ipl) )
+        return ;
+    if ( m_sum && (0xffff != sum(p,hl)) )
         return ;
     tcp(sip, dip, p+hl, p+ipl) ;
 }
